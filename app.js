@@ -6,7 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(function (data) {
             displayCandidates(data);
-        });
+        })
+        .catch(error => console.log(error))
+
+
 })
 
 
@@ -34,7 +37,6 @@ const createCandidate = (candidate) => {
     const name = document.createElement('h2')
     const image = document.createElement('img')
     const bio = document.createElement('p')
-
     const form = document.querySelector('form')
 
     name.innerText = candidate.name
@@ -49,16 +51,6 @@ const createCandidate = (candidate) => {
 
     candidateContainer.append(name, image, bio)
 }
-
-// const getNewCandidateInfo = () => {
-//     const name = document.getElementById('name')
-//     const image = document.getElementById('image')
-//     const bio = document.getElementById('bio')
-//     const votes = document.getElementById('votes')
-//     console.log("bio", bio)
-
-//     console.log(name.value)
-// }
 
 const postCandidate = candidate => {
     const options = {
@@ -78,4 +70,5 @@ const postCandidate = candidate => {
     return fetch('http://localhost:3000/candidates', options)
         .then(res => res.json())
         .then(res => console.log("response", res))
+        .catch(error => console.error(error));
 }
